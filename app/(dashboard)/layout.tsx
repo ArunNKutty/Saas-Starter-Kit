@@ -13,12 +13,13 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useUser } from "@/lib/auth";
 import { signOut } from "@/app/(login)/actions";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, setUser } = useUser();
   const router = useRouter();
+  const pathname = usePathname();
 
   async function handleSignOut() {
     setUser(null);
@@ -54,12 +55,17 @@ function Header() {
                 </Avatar>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="flex flex-col gap-1">
-                <DropdownMenuItem className="cursor-pointer">
-                  <Link href="/dashboard" className="flex w-full items-center">
-                    <Home className="mr-2 h-4 w-4" />
-                    <span>Dashboard</span>
-                  </Link>
-                </DropdownMenuItem>
+                {pathname !== "/dashboard" && (
+                  <DropdownMenuItem className="cursor-pointer">
+                    <Link
+                      href="/dashboard"
+                      className="flex w-full items-center"
+                    >
+                      <Home className="mr-2 h-4 w-4" />
+                      <span>Dashboard</span>
+                    </Link>
+                  </DropdownMenuItem>
+                )}
                 <form action={handleSignOut} className="w-full">
                   <button type="submit" className="flex w-full">
                     <DropdownMenuItem className="w-full flex-1 cursor-pointer">

@@ -144,7 +144,7 @@ export default function DashboardLayout({
         <main className="flex-1 overflow-y-auto p-0 lg:p-4">{children}</main>
 
         {/* Chat Button */}
-        <div className="fixed bottom-4 right-10">
+        <div className="fixed bottom-4 right-4 md:bottom-16 md:right-20">
           <Button
             variant="ghost"
             className="flex items-center space-x-2"
